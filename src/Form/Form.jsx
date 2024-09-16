@@ -10,16 +10,16 @@ const Form = () => {
     startDate: "",
     endDate: "",
     campaignDescription: "",
-    digestCampaign: false, // Toggle for digestCampaign
-    linkedKeywords: [], // Array to hold keywords
-    dailyDigest: "", // Ensure this matches expected values
+    digestCampaign: false,
+    linkedKeywords: [],
+    dailyDigest: "",
   });
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting form data:", formData); // Debugging line to check form data
+    console.log("Submitting form data:", formData); // Debugging line
 
     axios
       .post(
@@ -32,17 +32,19 @@ const Form = () => {
       })
       .catch((err) => {
         console.error("Error:", err);
-        // Optionally handle error feedback for the user
       });
   };
 
   const handleKeywordChange = (e) => {
-    if (e.key === "Enter" && e.target.value.trim()) {
-      setFormData((prevState) => ({
-        ...prevState,
-        linkedKeywords: [...prevState.linkedKeywords, e.target.value.trim()],
-      }));
-      e.target.value = ""; // Clear input after adding keyword
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent form submission
+      if (e.target.value.trim()) {
+        setFormData((prevState) => ({
+          ...prevState,
+          linkedKeywords: [...prevState.linkedKeywords, e.target.value.trim()],
+        }));
+        e.target.value = ""; // Clear input after adding keyword
+      }
     }
   };
 
@@ -50,6 +52,15 @@ const Form = () => {
     setFormData((prevState) => ({
       ...prevState,
       linkedKeywords: prevState.linkedKeywords.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Date change: ${name} = ${value}`); // Debugging line
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
     }));
   };
 
@@ -99,9 +110,7 @@ const Form = () => {
               id="startDate"
               name="startDate"
               value={formData.startDate}
-              onChange={(e) =>
-                setFormData({ ...formData, startDate: e.target.value })
-              }
+              onChange={handleDateChange}
             />
           </div>
           <div>
@@ -113,9 +122,7 @@ const Form = () => {
               id="endDate"
               name="endDate"
               value={formData.endDate}
-              onChange={(e) =>
-                setFormData({ ...formData, endDate: e.target.value })
-              }
+              onChange={handleDateChange}
             />
           </div>
         </div>

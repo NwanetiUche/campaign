@@ -1,0 +1,13 @@
+.bselectContainer {
+  width: 684 px;
+  height: 64px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.bdailyDigest {
+  width: 684px;
+  height: 40 px;
+  padding: 10px 0px 0px 0px;
+  border-radius: 4px;
+  border: 0.5px solid #999999;
+}

@@ -8,12 +8,14 @@ import { HiOutlineLightBulb } from "react-icons/hi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiBellOn } from "react-icons/ci";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { GrOverview } from "react-icons/gr";
 import Overviewsub from "../OverviewSub/Overviewsub";
 import { CiSearch } from "react-icons/ci";
 import Camppaign from "../Campaign/Camppaign";
 import Form from "../Form/Form";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Read from "../Read/Read";
+import Edit from "../Edit/Edit";
 
 const Overview = () => {
   return (
@@ -39,7 +41,7 @@ const Overview = () => {
                 <li>
                   {" "}
                   <span>
-                    <HiSpeakerphone />
+                    <GrOverview />
                   </span>
                   <span>Overview</span>
                 </li>
@@ -102,7 +104,8 @@ const Overview = () => {
             <Route path="/" element={<Overviewsub />} />
             <Route path="/newcampaign" element={<Form />} />
             <Route path="/camppaign" element={<Camppaign />} />
-            <Route path="/details" element={<Read />} />
+            <Route path="/details/:id" element={<Read />} />
+            <Route path="/edit" element={<Edit />} />
           </Routes>
         </div>
       </div>

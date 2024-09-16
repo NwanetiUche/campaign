@@ -7,13 +7,17 @@ table {
   width: 879px;
   margin: auto;
 }
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
 tr {
   width: 879px;
   height: 32px;
   gap: 8px;
   opacity: 0px;
 }
-th {
+thead {
   background-color: #f0f4f4;
   border-radius: 4px;
   padding: 12px, 10px, 12px, 10px;
