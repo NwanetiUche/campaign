@@ -1,0 +1,159 @@
+.formContainer {
+  margin-left: 85px;
+  margin-top: 32px;
+}
+.formContainer h2 {
+  color: #247b7b;
+  font-size: 20px;
+}
+form {
+  width: 684px;
+  height: 660px;
+  padding-top: 4px;
+  margin-bottom: 4px;
+  margin-top: 16px;
+  background-color: beige;
+}
+.campaignnameContainer {
+  width: 684pxpx;
+  height: 64px;
+  margin-bottom: 8px;
+}
+.textareaContainer {
+  width: 684px;
+  height: 136px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  opacity: 0px;
+}
+
+.linkedkeywordsContainer {
+  width: 684px;
+  height: 104px;
+  margin-bottom: 8px;
+  opacity: 0px;
+}
+.selectContainer {
+  width: 437px;
+  height: 66px;
+  margin-bottom: 8px;
+  opacity: 0px;
+}
+.buttonContainer {
+  width: 416px;
+  height: 40px;
+  margin-top: 92px;
+  opacity: 0px;
+}
+.text {
+  width: 100%;
+  height: px;
+  padding: 10px;
+  border-width: 0.5px;
+}
+textarea {
+  height: 112px;
+  width: 100%;
+  border-width: 0.5px;
+}
+.date {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 26px;
+}
+.dateinput {
+  width: 329px;
+  height: 40px;
+  padding: 10px 0px 0px 0px;
+  gap: 10px;
+  border-radius: 4px 0px 0px 0px;
+  border: 0.5px 0px 0px 0px;
+  opacity: 0px;
+  border-width: 0.5px;
+}
+.digest {
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+}
+.Cancelbutton {
+  width: 196px;
+  height: 40px;
+  opacity: 0px;
+  border-width: 0.5px;
+}
+.Cancelcreate {
+  width: 196px;
+  height: 40px;
+  opacity: 0px;
+  margin-left: 24px;
+  border-width: 0.5px;
+  background-color: #247b7b;
+}
+.Inputtext {
+  width: 684px;
+  height: 80px;
+  padding: 10px 0px 0px 0px;
+  margin-bottom: 10px;
+  border-radius: 4px 0px 0px 0px;
+  border: 0.5px 0px 0px 0px;
+  opacity: 0px;
+}
+input {
+  border-radius: 4px;
+  border-width: 0.5px;
+}
+select {
+  width: 155px;
+  height: 40px;
+  padding: 10px 0px 0px 0px;
+  margin-top: 10px;
+  border-radius: 4px 0px 0px 0px;
+  border: 0.5px 0px 0px 0px;
+  opacity: 0px;
+}
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}

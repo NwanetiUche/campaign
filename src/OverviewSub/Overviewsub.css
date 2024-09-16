@@ -8,8 +8,11 @@
   display: flex;
   justify-content: space-between;
   width: 991px;
+  height: 40px;
   margin: auto;
+  padding: 10px;
   background-color: red;
+  align-items: centers;
 }
 .AddSearch {
   margin-top: 119px;

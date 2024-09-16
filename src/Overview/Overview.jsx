@@ -10,83 +10,103 @@ import { CiBellOn } from "react-icons/ci";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Overviewsub from "../OverviewSub/Overviewsub";
 import { CiSearch } from "react-icons/ci";
+import Camppaign from "../Campaign/Camppaign";
+import Form from "../Form/Form";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Read from "../Read/Read";
 
 const Overview = () => {
   return (
-    <div className="overview">
-      <div className="first">
-        <div className="logocontainer">
-          <TbMessageReportFilled className="logo" /> <h1>Scrutz</h1>
-        </div>
-        <div className="list">
-          <ul>
-            <li>
-              <span>
-                <FaPlus />
-              </span>
-              <span>New Campaign</span>
-            </li>
-            <li></li>
-            <li>
-              {" "}
-              <span>
-                <HiSpeakerphone />
-              </span>
-              <span>Overview</span>
-            </li>
-            <li>
-              <span>
-                <HiSpeakerphone />
-              </span>
-              <span>Campaign</span>
-            </li>
-            <li>
-              <span>
-                <HiOutlineLightBulb />
-              </span>
-              <span>Market Intelligence</span>
-            </li>
-            <li>
-              <span>
-                <IoSettingsOutline />
-              </span>
-              <span>Account Settings</span>
-            </li>
-          </ul>
-        </div>
-        <div className="help">
-          <div>
-            <GoQuestion />
-            <h3>Need Help</h3>
-            <p>We are ready available to</p>
-            <p>provide help</p>
-            <button>Get Help</button>
+    <BrowserRouter>
+      <div className="overview">
+        <div className="first">
+          <div className="logocontainer">
+            <TbMessageReportFilled className="logo" /> <h1>Scrutz</h1>
           </div>
-        </div>
-      </div>
-      <div className="secondcontainer">
-        <div className="second">
-          <div className="search">
-            <input type="text" placeholder="search for anything..." />
-            <CiSearch className="searchicon" />
-          </div>
-          <div className="profiledetails">
-            <CiBellOn className="bell" />
-
-            <div>😎</div>
-            <p>
-              Big Tech{" "}
-              <span>
+          <div className="list">
+            <ul>
+              <Link to="/newcampaign">
+                <li>
+                  <span>
+                    <FaPlus />
+                  </span>
+                  <span className="none">New Campaign</span>
+                </li>
+              </Link>
+              <li></li>
+              <Link to="/">
                 {" "}
-                <RiArrowDropDownLine />
-              </span>
-            </p>
+                <li>
+                  {" "}
+                  <span>
+                    <HiSpeakerphone />
+                  </span>
+                  <span>Overview</span>
+                </li>
+              </Link>
+              <Link to="/camppaign">
+                {" "}
+                <li>
+                  <span>
+                    <HiSpeakerphone />
+                  </span>
+                  <span>Campaign</span>
+                </li>
+              </Link>
+              <li>
+                <span>
+                  <HiOutlineLightBulb />
+                </span>
+                <span>Market Intelligence</span>
+              </li>
+              <li>
+                <span>
+                  <IoSettingsOutline />
+                </span>
+                <span>Account Settings</span>
+              </li>
+            </ul>
+          </div>
+          <div className="help">
+            <div>
+              <GoQuestion />
+              <h3>Need Help</h3>
+              <p>We are ready available to</p>
+              <p>provide help</p>
+              <button>Get Help</button>
+            </div>
           </div>
         </div>
-        <hr />
-        <Overviewsub />
+        <div className="secondcontainer">
+          <div className="second">
+            <div className="search">
+              <input type="text" placeholder="search for anything..." />
+              <CiSearch className="searchicon" />
+            </div>
+            <div className="profiledetails">
+              <CiBellOn className="bell" />
+
+              <div>😎</div>
+              <p>
+                Big Tech{" "}
+                <span>
+                  {" "}
+                  <RiArrowDropDownLine />
+                </span>
+              </p>
+            </div>
+          </div>
+          <hr />
+
+          <Routes>
+            <Route path="/" element={<Overviewsub />} />
+            <Route path="/newcampaign" element={<Form />} />
+            <Route path="/camppaign" element={<Camppaign />} />
+            <Route path="/details" element={<Read />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 };
 

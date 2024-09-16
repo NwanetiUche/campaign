@@ -40,6 +40,7 @@ ul li {
   display: flex;
   gap: 5px;
   margin-left: -32px;
+  color: black;
 }
 
 .help {
