@@ -128,7 +128,7 @@ const Form = () => {
         </div>
         <div className="digest">
           <p>Want to receive daily digest about the campaign?</p>
-          <HiOutlineLightBulb />
+
           <label className="switch">
             <input
               type="checkbox"

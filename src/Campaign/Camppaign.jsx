@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Camppaign.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -61,76 +62,98 @@ const Camppaign = () => {
   const endPage = Math.min(currentPage + range, totalPages);
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr className="heading">
-            <td>S/N</td>
-            <td>Campaign Name</td>
-            <td>Start Date</td>
-            <td>Status</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {currentPageData.map((d, index) => (
-            <tr key={d.id}>
-              <td>{d.id}</td>
-              <td>{d.campaignName}</td>
-              <td>{d.startDate}</td>
-              <td>{d.campaignStatus}</td>
-              <td>
-                <div className="actions">
-                  <Link to={`/details/${d.id}`}>
-                    <IoEyeOutline />
-                  </Link>
-                  <Link to={`/edit/${d.id}`}>
-                    <FaRegEdit />
-                  </Link>
-                  <RiDeleteBin6Line onClick={() => handleDelete(d.id)} />
-                </div>
-              </td>
+    <div className="containerContainer">
+      <h2>All Campaigns</h2>
+      <div className="overallContainer">
+        <div className="containerRow">
+          <div className="allActive">
+            <div className="all">All(90)</div>
+            <div className="Inactive">Inactive(90) </div>
+            <div className="activeActive">Active(90)</div>
+          </div>
+          <div className="searchFilter">
+            <div>
+              <input
+                className="searchStyle"
+                type="search"
+                placeholder="search"
+              />
+            </div>
+            <div className="filter">
+              Filter By Date <RiArrowDropDownLine />
+            </div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr className="heading">
+              <td>S/N</td>
+              <td>Campaign Name</td>
+              <td>Start Date</td>
+              <td>Status</td>
+              <td>Actions</td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentPageData.map((d, index) => (
+              <tr key={d.id}>
+                <td>{d.id}</td>
+                <td>{d.campaignName}</td>
+                <td>{d.startDate}</td>
+                <td>{d.campaignStatus}</td>
+                <td>
+                  <div className="actions">
+                    <Link to={`/details/${d.id}`}>
+                      <IoEyeOutline />
+                    </Link>
+                    <Link to={`/edit/${d.id}`}>
+                      <FaRegEdit />
+                    </Link>
+                    <RiDeleteBin6Line onClick={() => handleDelete(d.id)} />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <div className="pagination">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &laquo; {/* Previous button */}
-        </button>
-        {startPage > 1 && (
-          <>
-            <button onClick={() => handlePageChange(1)}>1</button>
-            {startPage > 2 && <span>...</span>}
-          </>
-        )}
-        {pageNumbers.slice(startPage - 1, endPage).map((pageNumber) => (
+        <div className="pagination">
           <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            className={pageNumber === currentPage ? "active" : ""}
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {pageNumber}
+            &laquo; {/* Previous button */}
           </button>
-        ))}
-        {endPage < totalPages && (
-          <>
-            {endPage < totalPages - 1 && <span>...</span>}
-            <button onClick={() => handlePageChange(totalPages)}>
-              {totalPages}
+          {startPage > 1 && (
+            <>
+              <button onClick={() => handlePageChange(1)}>1</button>
+              {startPage > 2 && <span>...</span>}
+            </>
+          )}
+          {pageNumbers.slice(startPage - 1, endPage).map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={pageNumber === currentPage ? "active" : ""}
+            >
+              {pageNumber}
             </button>
-          </>
-        )}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &raquo; {/* Next button */}
-        </button>
+          ))}
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && <span>...</span>}
+              <button onClick={() => handlePageChange(totalPages)}>
+                {totalPages}
+              </button>
+            </>
+          )}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &raquo; {/* Next button */}
+          </button>
+        </div>
       </div>
     </div>
   );

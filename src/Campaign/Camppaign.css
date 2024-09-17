@@ -1,3 +1,75 @@
+.overallContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+}
+.containerContainer h2 {
+  margin-top: 13px;
+  margin-left: 85px;
+}
+.allActive {
+  display: flex;
+  gap: 4px;
+  width: 284px;
+  height: 40px;
+  gap: 16px;
+  justify-content: space-between;
+}
+.all {
+  width: 67px;
+  height: 40px;
+  padding: 6px 10px 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #2a9d8fd1;
+  align-self: center;
+}
+.Inactive {
+  width: 97px;
+  height: 40px;
+  padding: 6px 10px 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #2a9d8fd1;
+  align-self: center;
+}
+.activeActive {
+  width: 88px;
+  height: 40px;
+  padding: 6px 10px 6px 10px;
+
+  border-radius: 4px;
+  border: 1px solid #2a9d8fd1;
+  align-self: center;
+}
+.searchFilter {
+  display: flex;
+  justify-content: space-between;
+  width: 499px;
+  height: 44px;
+  gap: 28px;
+}
+.filter {
+  width: 227px;
+  height: 44px;
+  padding: 12px 10px 12px 10px;
+  border-radius: 4px;
+  border: 1px solid #2a9d8fd1;
+  align-self: center;
+}
+
+.searchStyle {
+  width: 244px;
+  height: 44px;
+  padding: 12px 10px 12px 10px;
+  border-radius: 4px;
+  border: 0.2px solid #2a9d8fd1;
+  align-self: center;
+}
+.containerRow {
+  display: flex;
+  width: 879px;
+  justify-content: space-between;
+}
 td {
   border-bottom: 1px solid black;
   text-align: center;
@@ -5,7 +77,9 @@ td {
 table {
   border-collapse: collapse;
   width: 879px;
+  height: 597px;
   margin: auto;
+  margin-top: 10px;
 }
 .actions {
   display: flex;
@@ -21,4 +95,52 @@ thead {
   background-color: #f0f4f4;
   border-radius: 4px;
   padding: 12px, 10px, 12px, 10px;
+}
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pagination button {
+  border: 1px solid #007bff;
+  background-color: #ffffff;
+  color: #007bff;
+  padding: 8px 16px;
+  margin: 0 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 14px;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.pagination button:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.pagination .active {
+  background-color: #007bff;
+  color: #ffffff;
+  border: 1px solid #007bff;
+}
+
+.pagination span {
+  margin: 0 5px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.pagination .ellipsis {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0 5px;
 }

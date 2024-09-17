@@ -9,7 +9,20 @@
   justify-content: center;
   align-items: center;
 }
-
+.getHelp {
+  width: 98px;
+  height: 32px;
+  padding: 8px 10px 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #247b7b;
+  background-color: transparent;
+  margin-top: 4px;
+}
+.liWhite {
+  background-color: white;
+  color: #247b7b;
+  text-align: center;
+}
 .logocontainer {
   display: flex;
   justify-content: center;
@@ -34,6 +47,21 @@
 ul {
   list-style: none;
   margin: auto;
+  padding: none;
+}
+.liActive {
+  background-color: #247b7b;
+  color: white;
+  text-align: center;
+}
+li a {
+  text-decoration: none;
+}
+li {
+  width: 196px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 4px;
 }
 ul li {
   padding: 17px;
@@ -74,6 +102,7 @@ input {
   border-radius: 4px;
   outline: none;
 }
+
 .search {
   position: relative;
 }

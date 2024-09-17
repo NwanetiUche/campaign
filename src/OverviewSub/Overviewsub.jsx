@@ -13,7 +13,9 @@ const Overviewsub = () => {
   return (
     <div className="OverviewsubsContainer">
       <div className="Overviewsubs">
-        <div>Overview</div>
+        <div className="overviewText">
+          <h2>Overview</h2>
+        </div>
         <div>{currentDate}</div>
       </div>
       <div className="AddSearch">
@@ -23,7 +25,7 @@ const Overviewsub = () => {
         <p>No activity yet.Create a new campaign to get started</p>
       </div>
       <div className="campaignAdd">
-        <Link to="./camppaign">
+        <Link style={{ textDecoration: "none" }} to="./camppaign">
           <span>
             <FaPlus />
           </span>

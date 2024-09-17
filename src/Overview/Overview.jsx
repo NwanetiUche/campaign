@@ -27,8 +27,8 @@ const Overview = () => {
           </div>
           <div className="list">
             <ul>
-              <Link to="/newcampaign">
-                <li>
+              <Link style={{ textDecoration: "none" }} to="/newcampaign">
+                <li className="liActive">
                   <span>
                     <FaPlus />
                   </span>
@@ -36,9 +36,9 @@ const Overview = () => {
                 </li>
               </Link>
               <li></li>
-              <Link to="/">
+              <Link style={{ textDecoration: "none" }} to="/">
                 {" "}
-                <li>
+                <li className="liWhite">
                   {" "}
                   <span>
                     <GrOverview />
@@ -46,7 +46,7 @@ const Overview = () => {
                   <span>Overview</span>
                 </li>
               </Link>
-              <Link to="/camppaign">
+              <Link style={{ textDecoration: "none" }} to="/camppaign">
                 {" "}
                 <li>
                   <span>
@@ -75,7 +75,7 @@ const Overview = () => {
               <h3>Need Help</h3>
               <p>We are ready available to</p>
               <p>provide help</p>
-              <button>Get Help</button>
+              <button className="getHelp">Get Help</button>
             </div>
           </div>
         </div>

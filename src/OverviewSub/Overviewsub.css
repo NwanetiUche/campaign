@@ -10,8 +10,13 @@
   height: 40px;
   margin: auto;
   padding: 10px;
-  background-color: red;
   align-items: centers;
+}
+.overviewText h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: left;
 }
 img {
   width: 426px;
