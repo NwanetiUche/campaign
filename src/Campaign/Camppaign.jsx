@@ -4,7 +4,7 @@ import "./Camppaign.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 10; // Number of rows per page
 
@@ -12,6 +12,7 @@ const Camppaign = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -22,6 +23,21 @@ const Camppaign = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = (id) => {
+    const confirm = window.confirm("Would you like to delete?");
+    if (confirm) {
+      axios
+        .delete(
+          `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`
+        )
+        .then((res) => {
+          // Refresh the page or fetch data again to reflect changes
+          navigate("/camppaign"); // Ensure this is the correct route
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   // Get the current page data
   const startIndex = (currentPage - 1) * PAGE_SIZE;
@@ -58,7 +74,7 @@ const Camppaign = () => {
         </thead>
         <tbody>
           {currentPageData.map((d, index) => (
-            <tr key={index}>
+            <tr key={d.id}>
               <td>{d.id}</td>
               <td>{d.campaignName}</td>
               <td>{d.startDate}</td>
@@ -68,11 +84,10 @@ const Camppaign = () => {
                   <Link to={`/details/${d.id}`}>
                     <IoEyeOutline />
                   </Link>
-                  <Link to="/edit">
-                    {" "}
+                  <Link to={`/edit/${d.id}`}>
                     <FaRegEdit />
                   </Link>
-                  <RiDeleteBin6Line />
+                  <RiDeleteBin6Line onClick={() => handleDelete(d.id)} />
                 </div>
               </td>
             </tr>

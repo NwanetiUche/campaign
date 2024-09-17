@@ -1,8 +1,7 @@
 .OverviewsubsContainer {
-  background-color: aqua;
-
   height: 776px;
   padding: 38px;
+  overflow: hidden;
 }
 .Overviewsubs {
   display: flex;
@@ -14,20 +13,19 @@
   background-color: red;
   align-items: centers;
 }
+img {
+  width: 426px;
+  height: 290px;
+}
 .AddSearch {
   margin-top: 119px;
   margin-left: 340px;
-  border: 1px solid black;
   width: 426px;
   height: 290px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
 }
-.AddSearchIcon {
-  height: 150px;
-  width: 150px;
-}
+
 .word {
   margin-left: 385px;
   margin-top: 44px;
@@ -35,4 +33,10 @@
 .campaignAdd {
   margin-left: 455px;
   margin-top: 35px;
+  background-color: #247b7b;
+  width: 196px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

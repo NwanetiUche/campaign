@@ -105,7 +105,7 @@ const Overview = () => {
             <Route path="/newcampaign" element={<Form />} />
             <Route path="/camppaign" element={<Camppaign />} />
             <Route path="/details/:id" element={<Read />} />
-            <Route path="/edit" element={<Edit />} />
+            <Route path="/edit/:id" element={<Edit />} />
           </Routes>
         </div>
       </div>

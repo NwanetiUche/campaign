@@ -49,7 +49,7 @@ const Read = () => {
 
   return (
     <div className="formContainer">
-      <h2>Edit Campaign Information</h2>
+      <h2>Campaign Information</h2>
       <form>
         <div className="campaignnameContainer">
           <label htmlFor="campaignName">Campaign Name</label>
