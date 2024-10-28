@@ -37,6 +37,7 @@ const Camppaign = () => {
           alert("Deleted Sucessfully");
           // Refresh the page or fetch data again to reflect changes
           location.reload(); // Ensure this is the correct route
+          navigate("/camppaign");
         })
         .catch((err) => console.log(err));
     }
