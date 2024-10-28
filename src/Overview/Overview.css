@@ -89,11 +89,15 @@ ul li {
   flex: 1;
   height: 868px;
 }
+.secondSecond {
+  height: 102px;
+  border-bottom: 1px solid black;
+}
 .second {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 102px;
+
   padding: 35px;
 }
 input {

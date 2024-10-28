@@ -1,0 +1,23 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 572px;
+  height: 353px;
+  top: 258px;
+  left: 434px;
+  padding: 72px 78px 72px 78px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid black;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  z-index: 4;
+  background-color: white;
+}
+.secondbox {
+  border: 1px solid black;
+  width: 416px;
+  height: 209px;
+}

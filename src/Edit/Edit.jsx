@@ -1,58 +1,63 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import { HiOutlineLightBulb } from "react-icons/hi"; // Import the icon
-import "./Edit.css";
 
 const Edit = () => {
-  const [data, setData] = useState({
-    id: "",
+  const { id } = useParams();
+  const [formData, setFormData] = useState({
+    id: id,
     campaignName: "",
     startDate: "",
     endDate: "",
-    linkedKeywords: [], // Changed to an array
-    dailyDigest: "yes",
-    frequency: "monthly",
-    campaignDescription: "", // Added for completeness
-    digestCampaign: false, // Added for completeness
+    campaignDescription: "",
+    digestCampaign: false,
+    linkedKeywords: [],
+    dailyDigest: "",
   });
-
-  const { id } = useParams();
-  const navigate = useNavigate(); // Use navigate for redirection
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (id) {
-      axios
-        .get(
+    const fetchCampaignData = async () => {
+      try {
+        const res = await axios.get(
           `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`
-        )
-        .then((res) => {
-          const responseData = res.data;
+        );
+        const data = res.data;
+        // Format dates to 'yyyy-MM-dd'
+        const formattedData = {
+          ...data,
+          startDate: data.startDate.split("T")[0], // Get only the date part
+          endDate: data.endDate.split("T")[0], // Get only the date part
+        };
+        setFormData(formattedData);
+      } catch (err) {
+        console.error("Error fetching campaign data:", err);
+        alert("Failed to fetch campaign data.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-          // Format dates to yyyy-MM-dd
-          const formatDate = (dateString) => dateString.split("T")[0]; // Extract date part only
-
-          setData({
-            ...responseData,
-            startDate: formatDate(responseData.startDate),
-            endDate: formatDate(responseData.endDate),
-            linkedKeywords: responseData.linkedKeywords || [], // Ensure linkedKeywords is an array
-          });
-        })
-        .catch((err) => console.log(err));
-    }
+    fetchCampaignData();
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting form data:", formData);
 
-  const handleDateChange = (e) => {
-    handleChange(e);
+    try {
+      const res = await axios.put(
+        `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`,
+        formData
+      );
+      console.log("Response:", res);
+      alert("Updated successfully");
+      navigate("/campaign");
+    } catch (err) {
+      console.error("Error updating campaign:", err);
+      alert("Failed to update campaign.");
+    }
   };
 
   const handleKeywordChange = (e) => {
@@ -60,41 +65,34 @@ const Edit = () => {
       e.preventDefault();
       const keyword = e.target.value.trim();
       if (keyword) {
-        setData((prevData) => ({
-          ...prevData,
-          linkedKeywords: [...prevData.linkedKeywords, keyword],
+        setFormData((prevState) => ({
+          ...prevState,
+          linkedKeywords: [...prevState.linkedKeywords, keyword],
         }));
-        e.target.value = ""; // Clear the input field
+        e.target.value = "";
       }
     }
   };
 
   const removeKeyword = (index) => {
-    setData((prevData) => ({
-      ...prevData,
-      linkedKeywords: prevData.linkedKeywords.filter((_, i) => i !== index),
+    setFormData((prevState) => ({
+      ...prevState,
+      linkedKeywords: prevState.linkedKeywords.filter((_, i) => i !== index),
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Update the data on the server
-    axios
-      .put(
-        `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`,
-        data
-      )
-      .then(() => {
-        alert("Campaign updated successfully!");
-        // Redirect after successful update
-        navigate(`/edit/${id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Error updating campaign. Please try again.");
-      });
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Date change: ${name} = ${value}`);
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="formContainer">
@@ -108,9 +106,11 @@ const Edit = () => {
             type="text"
             id="campaignName"
             name="campaignName"
-            placeholder="e.g The future is now"
-            value={data.campaignName}
-            onChange={handleChange}
+            placeholder="e.g. The future is now"
+            value={formData.campaignName}
+            onChange={(e) =>
+              setFormData({ ...formData, campaignName: e.target.value })
+            }
             required
           />
           <br />
@@ -120,10 +120,14 @@ const Edit = () => {
           <br />
           <textarea
             id="campaignDescription"
-            name="campaignDescription"
             placeholder="Please add a description to your campaign"
-            value={data.campaignDescription}
-            onChange={handleChange}
+            value={formData.campaignDescription}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                campaignDescription: e.target.value,
+              })
+            }
           />
         </div>
         <div className="date">
@@ -135,7 +139,7 @@ const Edit = () => {
               type="date"
               id="startDate"
               name="startDate"
-              value={data.startDate}
+              value={formData.startDate}
               onChange={handleDateChange}
             />
           </div>
@@ -147,20 +151,19 @@ const Edit = () => {
               type="date"
               id="endDate"
               name="endDate"
-              value={data.endDate}
+              value={formData.endDate}
               onChange={handleDateChange}
             />
           </div>
         </div>
         <div className="digest">
           <p>Want to receive daily digest about the campaign?</p>
-          <HiOutlineLightBulb />
           <label className="switch">
             <input
               type="checkbox"
-              checked={data.digestCampaign}
+              checked={formData.digestCampaign}
               onChange={(e) =>
-                setData({ ...data, digestCampaign: e.target.checked })
+                setFormData({ ...formData, digestCampaign: e.target.checked })
               }
             />
             <span className="slider"></span>
@@ -173,11 +176,12 @@ const Edit = () => {
             className="Inputtext"
             type="text"
             id="linkedKeywords"
+            name="linkedKeywords"
             placeholder="Type your keywords and press Enter"
             onKeyDown={handleKeywordChange}
           />
           <ul>
-            {data.linkedKeywords.map((keyword, index) => (
+            {formData.linkedKeywords.map((keyword, index) => (
               <li key={index}>
                 {keyword}{" "}
                 <button type="button" onClick={() => removeKeyword(index)}>
@@ -188,16 +192,19 @@ const Edit = () => {
           </ul>
         </div>
         <div className="selectContainer">
-          <label htmlFor="frequency">
+          <label htmlFor="dailyDigest">
             Kindly select how often you want to receive daily digest
           </label>
           <br />
           <select
-            name="frequency"
-            id="frequency"
-            value={data.frequency}
-            onChange={handleChange}
+            name="dailyDigest"
+            id="dailyDigest"
+            value={formData.dailyDigest}
+            onChange={(e) =>
+              setFormData({ ...formData, dailyDigest: e.target.value })
+            }
           >
+            <option value="">Select Frequency</option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
@@ -213,7 +220,7 @@ const Edit = () => {
             Cancel
           </button>
           <button type="submit" className="Cancelcreate">
-            Edit Information
+            Update Campaign
           </button>
         </div>
       </form>

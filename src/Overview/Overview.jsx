@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Overview.css";
 import { TbMessageReportFilled } from "react-icons/tb";
 import { GoQuestion } from "react-icons/go";
@@ -16,8 +16,10 @@ import Form from "../Form/Form";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Read from "../Read/Read";
 import Edit from "../Edit/Edit";
+import Stop from "../CardStopCampaign/Stop";
 
 const Overview = () => {
+  const [menu, setMenu] = useState("overview");
   return (
     <BrowserRouter>
       <div className="overview">
@@ -28,7 +30,12 @@ const Overview = () => {
           <div className="list">
             <ul>
               <Link style={{ textDecoration: "none" }} to="/newcampaign">
-                <li className="liActive">
+                <li
+                  onClick={() => {
+                    setMenu("newcampaign");
+                  }}
+                  className={menu === "newcampaign" ? "liWhite" : "liActive"}
+                >
                   <span>
                     <FaPlus />
                   </span>
@@ -38,7 +45,12 @@ const Overview = () => {
               <li></li>
               <Link style={{ textDecoration: "none" }} to="/">
                 {" "}
-                <li className="liWhite">
+                <li
+                  onClick={() => {
+                    setMenu("overview");
+                  }}
+                  className={menu === "overview" ? "liWhite" : ""}
+                >
                   {" "}
                   <span>
                     <GrOverview />
@@ -48,7 +60,12 @@ const Overview = () => {
               </Link>
               <Link style={{ textDecoration: "none" }} to="/camppaign">
                 {" "}
-                <li>
+                <li
+                  onClick={() => {
+                    setMenu("campaign");
+                  }}
+                  className={menu === "campaign" ? "liWhite" : ""}
+                >
                   <span>
                     <HiSpeakerphone />
                   </span>
@@ -80,25 +97,27 @@ const Overview = () => {
           </div>
         </div>
         <div className="secondcontainer">
-          <div className="second">
-            <div className="search">
-              <input type="text" placeholder="search for anything..." />
-              <CiSearch className="searchicon" />
-            </div>
-            <div className="profiledetails">
-              <CiBellOn className="bell" />
+          <div className="secondSecond">
+            <div className="second">
+              <div className="search">
+                <input type="text" placeholder="search for anything..." />
+                <CiSearch className="searchicon" />
+              </div>
+              <div className="profiledetails">
+                <CiBellOn className="bell" />
 
-              <div>😎</div>
-              <p>
-                Big Tech{" "}
-                <span>
-                  {" "}
-                  <RiArrowDropDownLine />
-                </span>
-              </p>
+                <div>😎</div>
+                <p>
+                  Big Tech{" "}
+                  <span>
+                    {" "}
+                    <RiArrowDropDownLine />
+                  </span>
+                </p>
+              </div>
+              <hr />
             </div>
           </div>
-          <hr />
 
           <Routes>
             <Route path="/" element={<Overviewsub />} />
@@ -106,6 +125,7 @@ const Overview = () => {
             <Route path="/camppaign" element={<Camppaign />} />
             <Route path="/details/:id" element={<Read />} />
             <Route path="/edit/:id" element={<Edit />} />
+            <Route path="/stop" element={<Stop />} />
           </Routes>
         </div>
       </div>

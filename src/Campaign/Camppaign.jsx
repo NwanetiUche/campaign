@@ -5,7 +5,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PAGE_SIZE = 10; // Number of rows per page
 
@@ -14,6 +14,7 @@ const Camppaign = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     axios
@@ -33,8 +34,9 @@ const Camppaign = () => {
           `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`
         )
         .then((res) => {
+          alert("Deleted Sucessfully");
           // Refresh the page or fetch data again to reflect changes
-          navigate("/camppaign"); // Ensure this is the correct route
+          location.reload(); // Ensure this is the correct route
         })
         .catch((err) => console.log(err));
     }
@@ -109,7 +111,7 @@ const Camppaign = () => {
                     <Link to={`/edit/${d.id}`}>
                       <FaRegEdit />
                     </Link>
-                    <RiDeleteBin6Line onClick={() => handleDelete(d.id)} />
+                    <RiDeleteBin6Line onClick={(e) => handleDelete(d.id)} />
                   </div>
                 </td>
               </tr>
