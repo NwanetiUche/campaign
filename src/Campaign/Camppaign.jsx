@@ -33,11 +33,9 @@ const Camppaign = () => {
         .delete(
           `https://infinion-test-int-test.azurewebsites.net/api/Campaign/${id}`
         )
-        .then((res) => {
-          alert("Deleted Sucessfully");
-          // Refresh the page or fetch data again to reflect changes
-          location.reload(); // Ensure this is the correct route
-          navigate("/camppaign");
+        .then(() => {
+          setData(data.filter((item) => item.id !== id)); // Update state to remove the deleted item
+          alert("Deleted Successfully");
         })
         .catch((err) => console.log(err));
     }
